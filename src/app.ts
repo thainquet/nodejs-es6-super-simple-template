@@ -1,6 +1,6 @@
 import express from "express";
 import morgan from "morgan";
-import router from "./routers";
+import router from "./router";
 
 const app: express.Application = express();
 const port: number = 3000;
