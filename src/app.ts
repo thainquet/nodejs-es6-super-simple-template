@@ -3,6 +3,7 @@ import morgan from "morgan";
 import router from "./router";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
 
 dotenv.config();
 
@@ -20,7 +21,10 @@ const port: string | number = process.env.PORT || 3000;
 connection.once("open", () => {
   console.log("Mongodb database connection established successfully !!");
 });
+
+app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(
   morgan(":method :url :status :res[content-length] - :response-time ms")
 );
