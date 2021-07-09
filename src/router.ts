@@ -16,7 +16,7 @@ router.get("/", (req, res) => {
 });
 
 router.get("/page", (req, res) => {
-  res.sendFile(srcDir + "/static/index.html");
+  res.sendFile(srcDir + "/static/copy.html");
 });
 
 router.get("/search/:queryName", async (req, res) => {

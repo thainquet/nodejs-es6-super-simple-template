@@ -7,7 +7,9 @@
     <title>Test</title>
 </head>
 <body>
-    <h1>Hi</h1>
+    <h1>Messages:</h1>
+    <h2 id="hh"></h2>
+    <iframe id="ifr" src="https://9ab3974c3b22.ngrok.io/page"></iframe>
     <script>
         const url_string = window.location.href
         const url = new URL(url_string);
@@ -23,12 +25,19 @@
         } else {
             console.log("not a mobile browser")
         }
-        // const data = {
-        //         "component": id === "1" ? "location" : "camera",
-        //         "inputs": [],
-        //         "outputs": []
-        //     }
-        // window.ReactNativeWebView.postMessage(JSON.stringify(data)) 
+        window.addEventListener('message', function(event){
+            console.log(`Received message:`, event.data);
+            document.getElementById("hh").innerHTML += JSON.stringify(event.data)
+            const ifr = document.getElementById("ifr")
+            let ifrWindow
+            try {
+                ifrWindow = ifr.contentWindow;
+                ifrWindow.postMessage(JSON.stringify(event.data))
+            } catch {
+                ifrWindow = ifr.contentWindow;
+                ifrWindow.postMessage(JSON.stringify(event.data))
+            }
+        })
     </script>
 </body>
 </html>
