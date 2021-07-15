@@ -9,7 +9,6 @@
 <body>
     <h1>Messages:</h1>
     <h2 id="hh"></h2>
-    <iframe id="ifr" src="https://9ab3974c3b22.ngrok.io/page"></iframe>
     <script>
         const url_string = window.location.href
         const url = new URL(url_string);
@@ -17,16 +16,17 @@
         const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
         if (isMobile) {
             const data = {
-                "component": id === "1" ? "location" : "camera",
-                "inputs": [],
-                "outputs": []
+                type: "camera",
+                wi: "string",
+                folder: "string",
+                name: "string",
             }
             window.ReactNativeWebView.postMessage(JSON.stringify(data)) 
         } else {
             console.log("not a mobile browser")
         }
         window.addEventListener('message', function(event){
-            console.log(`Received message:`, event.data);
+            console.log(`Received message:`, JSON.stringify(event.data));
             document.getElementById("hh").innerHTML += JSON.stringify(event.data)
             const ifr = document.getElementById("ifr")
             let ifrWindow
